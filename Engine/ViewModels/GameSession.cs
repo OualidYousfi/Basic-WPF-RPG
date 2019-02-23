@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Engine.Models;
+using Engine.Factories;
 
 //ViewModel of MVVM
 
@@ -12,6 +13,7 @@ namespace Engine.ViewModels
     {
         public Player CurrentPlayer { get; set; }
         public Location CurrentLocation { get; set; }
+        public World CurrentWorld { get; set; }
 
         public GameSession()
         {
@@ -23,12 +25,10 @@ namespace Engine.ViewModels
             CurrentPlayer.ExperiencePoints = 0;
             CurrentPlayer.Level = 1;
 
-            CurrentLocation = new Location();
-            CurrentLocation.Name = "Home";
-            CurrentLocation.XCoordinate = 0;
-            CurrentLocation.YCoordinate = -1;
-            CurrentLocation.Description = "This is your house.";
-            CurrentLocation.ImageName = "/Engine;component/Images/Locations/Home.png";
+            WorldFactory factory = new WorldFactory();
+            CurrentWorld = factory.createWorld();
+
+            CurrentLocation = CurrentWorld.LocationAt(0, -1);
         }
     }
 }
