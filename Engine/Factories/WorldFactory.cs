@@ -7,9 +7,9 @@ using Engine.Models;
 namespace Engine.Factories
 {
     //only will be used in Engine project
-    internal class WorldFactory
+    internal static class WorldFactory
     {
-        internal World createWorld()
+        internal static World createWorld()
         {
             World newWorld = new World();
             newWorld.AddLocation(-2, -1, "Farmer's Field",
@@ -22,22 +22,22 @@ namespace Engine.Factories
                 "This is your home.", 
                 "/Engine;component/Images/Locations/Home.png");
             newWorld.AddLocation(-1, 0, "Trading Shop",
-                "This is the trading shop.",
+                "The shop of Susan, the trader.",
                 "/Engine;component/Images/Locations/Trader.png");
             newWorld.AddLocation(0, 0, "Town Square",
-                "This is the town square.",
+                "You see a fountain here.",
                 "/Engine;component/Images/Locations/TownSquare.png");
             newWorld.AddLocation(1, 0, "Town Gate",
-                "This is the town gate.",
+                "There is a gate here, protecting the town from giant spiders.",
                 "/Engine;component/Images/Locations/TownGate.png");
             newWorld.AddLocation(2, 0, "Spider Forest",
-                "This is the spider forest.",
+                "The trees in this forest are covered in spider webs.",
                 "/Engine;component/Images/Locations/SpiderForest.png");
             newWorld.AddLocation(0, 1, "Herbalist's Hut",
-                "This is the herbalist's hut.",
+                "You see a small hut, with plants drying from the roof.",
                 "/Engine;component/Images/Locations/HerbalistsHut.png");
             newWorld.AddLocation(0, 2, "Herb Garden",
-                "This is the herb garden.",
+                "There are many plants here, with snakes hiding behind them.",
                 "/Engine;component/Images/Locations/HerbalistsGarden.png");
             return newWorld;
         }
