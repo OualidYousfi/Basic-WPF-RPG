@@ -71,6 +71,17 @@
 				<ColumnDefinition Width="3*"/>
 				<ColumnDefinition Width="2*"/>
 			</Grid.ColumnDefinitions>
+			
+			<!-- Game messages -->
+			<Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" BorderBrush="Gainsboro" BorderThickness="1">
+				<RichTextBox x:Name="GameMessages" Background="Beige" VerticalScrollBarVisibility="Auto">
+					<RichTextBox.Resources>
+						<Style TargetType="{x:Type Paragraph}">
+							<Setter Property="Margin" Value="0"/>
+						</Style>
+					</RichTextBox.Resources>
+				</RichTextBox>
+			</Border>
 
 			<!-- Location information -->
 			<Border Grid.Row="0" Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="1">
@@ -84,7 +95,8 @@
 					<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Name}"/>
 					<Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Width="125"
 						   Source="{Binding CurrentLocation.ImageName}"/>
-					<TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Description}"/>
+					<TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Description}"
+							   TextWrapping="Wrap"/>
 				</Grid>
 			</Border>
 			
@@ -134,6 +146,7 @@
 				</TabItem>
 			</TabControl>
 		</Grid>
+		
 		<Grid Grid.Row="2" Grid.Column="1" Background="Lavender">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>

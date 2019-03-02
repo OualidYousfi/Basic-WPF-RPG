@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using Engine.Models;
+using Engine.EventArgs;
 using Engine.Factories;
+using Engine.Models;
 
 //ViewModel of MVVM
 
@@ -12,6 +13,10 @@ namespace Engine.ViewModels
 {
     public class GameSession : BaseNotificationClass
     {
+        public event EventHandler<GameMessageEventArgs> OnMessageRaised;
+
+        #region Properties
+
         private Location _currentLocation;
         private Monster _currentMonster;
 
@@ -44,8 +49,16 @@ namespace Engine.ViewModels
 
                 OnPropertyChanged(nameof(CurrentMonster));
                 OnPropertyChanged(nameof(HasMonster));
+
+                if (CurrentMonster != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"You see a {CurrentMonster.Name} here!");
+                }
             }
         }
+
+        public Weapon CurrentWeapon { get; set; }
 
         //properties that determine whether there's a location in a certain direction
 
@@ -70,6 +83,8 @@ namespace Engine.ViewModels
         }
 
         public bool HasMonster => CurrentMonster != null;
+
+        #endregion
 
         public GameSession()
         {
@@ -136,6 +151,11 @@ namespace Engine.ViewModels
         private void GetMonsterAtLocation()
         {
             CurrentMonster = CurrentLocation.GetMonster();
+        }
+
+        private void RaiseMessage(string message)
+        {
+            OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
         }
     }
 }
