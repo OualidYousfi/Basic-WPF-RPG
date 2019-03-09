@@ -12,16 +12,14 @@
 	<Window.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
 	</Window.Resources>
-	
-    <Grid>
-		<!-- 3 rows : Auto / * / 225 -->
+
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="225"></RowDefinition>
 		</Grid.RowDefinitions>
 		
-		<!-- 2 cols : 250 / * -->
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="250"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
@@ -208,6 +206,7 @@
 						Content="West"></Button>
 				<Button Grid.Row="1" Grid.Column="1"
 						Height="25" Width="65" Margin="10"
+						Click="OnClick_DisplayTradeScreen"
 						Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"
 						Content="Trade"></Button>
 				<Button Grid.Row="1" Grid.Column="2" 

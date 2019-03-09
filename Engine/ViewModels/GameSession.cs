@@ -23,6 +23,7 @@ namespace Engine.ViewModels
 
         public World CurrentWorld { get; set; }
         public Player CurrentPlayer { get; set; }
+
         public Location CurrentLocation
         {
             get { return _currentLocation; }
@@ -38,6 +39,8 @@ namespace Engine.ViewModels
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
                 GetMonsterAtLocation();
+
+                CurrentTrader = CurrentLocation.TraderHere;
             }
         }
 
