@@ -16,7 +16,7 @@ namespace Engine.Models
         public string Name
         {
             get { return _name; }
-            set
+            private set
             {
                 _name = value;
 
@@ -27,7 +27,7 @@ namespace Engine.Models
         public int CurrentHitPoints
         {
             get { return _currentHitPoints; }
-            set
+            private set
             {
                 _currentHitPoints = value;
 
@@ -38,7 +38,7 @@ namespace Engine.Models
         public int MaximumHitPoints
         {
             get { return _maximumHitPoints; }
-            set
+            private set
             {
                 _maximumHitPoints = value;
 
@@ -49,7 +49,7 @@ namespace Engine.Models
         public int Gold
         {
             get { return _gold; }
-            set
+            private set
             {
                 _gold = value;
 
@@ -64,10 +64,60 @@ namespace Engine.Models
         //no GET or SET. any time Weapons get accessed we check the weapons in Inventory
         public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
 
-        protected LivingEntity()
+        public bool IsDead => CurrentHitPoints <= 0;
+
+        public event EventHandler OnKilled;
+
+        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold)
         {
+            Name = name;
+            MaximumHitPoints = maximumHitPoints;
+            CurrentHitPoints = currentHitPoints;
+            Gold = gold;
+
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
+        }
+
+        public void TakeDamage(int hitPointsDamage)
+        {
+            CurrentHitPoints -= hitPointsDamage;
+
+            if (IsDead)
+            {
+                CurrentHitPoints = 0;
+                RaiseOnKilledEvent();
+            }
+        }
+
+        public void Heal(int hitPointsToHeal)
+        {
+            CurrentHitPoints += hitPointsToHeal;
+
+            if(CurrentHitPoints > MaximumHitPoints)
+            {
+                CurrentHitPoints = MaximumHitPoints;
+            }
+        }
+
+        public void CompletelyHeal()
+        {
+            CurrentHitPoints = MaximumHitPoints;
+        }
+
+        public void ReceiveGold(int amountOfGold)
+        {
+            Gold += amountOfGold;
+        }
+
+        public void SpendGold(int amountOfGold)
+        {
+            if(amountOfGold > Gold)
+            {
+                throw new ArgumentException($"{Name} only has {Gold} gold, and cannot spend {amountOfGold}.");
+            }
+
+            Gold -= amountOfGold;
         }
 
         public void AddItemToInventory(GameItem item)
@@ -108,6 +158,11 @@ namespace Engine.Models
             }
 
             OnPropertyChanged(nameof(Weapons));
+        }
+
+        private void RaiseOnKilledEvent()
+        {
+            OnKilled?.Invoke(this, new System.EventArgs());
         }
     }
 }
