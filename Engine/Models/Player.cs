@@ -11,7 +11,6 @@ namespace Engine.Models
     {
         private String _characterClass;
         private int _experiencePoints;
-        private int _level;
 
         public String CharacterClass
         {
@@ -20,7 +19,7 @@ namespace Engine.Models
             {
                 _characterClass = value;
 
-                OnPropertyChanged(nameof(CharacterClass));
+                OnPropertyChanged();
             }
         }
 
@@ -31,13 +30,13 @@ namespace Engine.Models
             {
                 _experiencePoints = value;
 
-                OnPropertyChanged(nameof(ExperiencePoints));
+                OnPropertyChanged();
 
                 SetLevelAndMaximumHitPoints();
             }
         }
 
-        public ObservableCollection<QuestStatus> Quests { get; set; }
+        public ObservableCollection<QuestStatus> Quests { get; }
 
         public event EventHandler OnLeveledUp;
 

@@ -8,16 +8,26 @@ namespace Engine.Models
 {
     public class Location
     {
-        public int XCoordinate { get; set; }
-        public int YCoordinate { get; set; }
-        public String Name { get; set; }
-        public String Description { get; set; }
-        public String ImageName { get; set; }
-        public List<Quest> QuestsAvailableHere { get; set; } = new List<Quest>();
+        public int XCoordinate { get; }
+        public int YCoordinate { get; }
+        public String Name { get; }
+        public String Description { get; }
+        public String ImageName { get; }
 
-        public List<MonsterEncounter> MonstersHere { get; set; } = new List<MonsterEncounter>();
+        public List<Quest> QuestsAvailableHere { get; } = new List<Quest>();
+
+        public List<MonsterEncounter> MonstersHere { get; } = new List<MonsterEncounter>();
 
         public Trader TraderHere { get; set; }
+
+        public Location(int xCoordinate, int yCoordinate, string name, string description, string imageName)
+        {
+            XCoordinate = xCoordinate;
+            YCoordinate = yCoordinate;
+            Name = name;
+            Description = description;
+            ImageName = imageName;
+        }
 
         public void AddMonster(int monsterID, int chanceOfEncountering)
         {

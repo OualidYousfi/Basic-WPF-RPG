@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Engine
 {
@@ -10,10 +7,15 @@ namespace Engine
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             //if anybody is listening? we need to send them a message that this property has changed
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+}
+
+namespace System.Runtime.CompilerServices
+{
+    sealed class CallerMemberNameAttribute : Attribute { }
 }
