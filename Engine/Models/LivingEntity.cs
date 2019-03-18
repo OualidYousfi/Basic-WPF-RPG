@@ -74,7 +74,7 @@ namespace Engine.Models
         public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; }
 
         //no GET or SET. any time Weapons get accessed we check the weapons in Inventory
-        public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
+        public List<GameItem> Weapons => Inventory.Where(i => i.Category is GameItem.ItemCategory.Weapon).ToList();
 
         public bool IsDead => CurrentHitPoints <= 0;
 

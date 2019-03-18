@@ -103,7 +103,7 @@ namespace Engine.ViewModels
             }
         }
 
-        public Weapon CurrentWeapon { get; set; }
+        public GameItem CurrentWeapon { get; set; }
 
         //properties that determine whether there's a location in a certain direction
 
