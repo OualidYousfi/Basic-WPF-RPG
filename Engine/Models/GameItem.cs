@@ -8,7 +8,7 @@ namespace Engine.Models
 {
     public class GameItem
     {
-        public enum ItemCategory { Miscellaneous, Weapon }
+        public enum ItemCategory { Miscellaneous, Weapon, Consumable }
 
         public ItemCategory Category { get; }
         public int ItemTypeID { get; }

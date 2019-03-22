@@ -134,6 +134,8 @@ namespace Engine.ViewModels
                 CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));
             }
 
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));
+
             CurrentWorld = WorldFactory.createWorld();
 
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
@@ -272,6 +274,11 @@ namespace Engine.ViewModels
                 //let the monster attack
                 CurrentMonster.UseCurrentWeaponOn(CurrentPlayer);
             }
+        }
+
+        public void UseCurrentConsumable()
+        {
+            CurrentPlayer.UseCurrentConsumable();
         }
 
         private void OnCurrentPlayerPerformedAction(object sender, string result)
